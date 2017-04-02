@@ -1,2 +1,5 @@
 tensorflow/
 testing/
+parallelCorpus/
+__pycache__/
+
