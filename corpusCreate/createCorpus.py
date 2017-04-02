@@ -23,7 +23,7 @@ from logFile import handleException, handleInfo
 REMOTE_SERVER = "www.google.com"
 
 currentDirectory = os.path.dirname(__file__)
-inputDir = os.path.join(currentDirectory, 'input400')
+inputDir = os.path.join(currentDirectory, 'inu')
 
 if not os.path.exists(os.path.join(currentDirectory, 'output400')):
     os.makedirs(currentDirectory + '/output400')
@@ -126,35 +126,35 @@ def process_file(inputFile):
     # if(inputFile == "1.txt"):
     # unpaused.wait()
     # event.wait()
-
-    inputFileName = inputFile
-    inputFile = os.path.join(inputDir, inputFile)
-    currentTextFile = open(inputFile)
-    completeDict = OrderedDict()
-    for line in currentTextFile:
-        line = re.split(r'\t+|\n', line)
-        del line[-1]
-        spanishId = re.split(r'\.', re.split(r'\/', line[1])[3])[0]
-        if (spanishId in completeDict):
-            completeDict[spanishId][2] = completeDict[spanishId][2] + "," + line[2]
-            completeDict[spanishId][3] = completeDict[spanishId][3] + "," + line[3]
-        else:
-            completeDict[spanishId] = completeDict.get(spanishId, line)
-    completeDict.popitem(last=False)[0]
-    completeDict.popitem(last=True)[0]
-    completeDictionary = {}
-
-    # i = 0
-    # for key, value in completeDict.items():
-    #     completeDictionary[key] = value
-    #     i += 1
-    #     if (i == 5):
-    #         break
+    print (inputFile)
+    # inputFileName = inputFile
+    # inputFile = os.path.join(inputDir, inputFile)
+    # currentTextFile = open(inputFile)
+    # completeDict = OrderedDict()
+    # for line in currentTextFile:
+    #     line = re.split(r'\t+|\n', line)
+    #     del line[-1]
+    #     spanishId = re.split(r'\.', re.split(r'\/', line[1])[3])[0]
+    #     if (spanishId in completeDict):
+    #         completeDict[spanishId][2] = completeDict[spanishId][2] + "," + line[2]
+    #         completeDict[spanishId][3] = completeDict[spanishId][3] + "," + line[3]
+    #     else:
+    #         completeDict[spanishId] = completeDict.get(spanishId, line)
+    # completeDict.popitem(last=False)[0]
+    # completeDict.popitem(last=True)[0]
+    # completeDictionary = {}
     #
-    # message = inputFileName + " : " + str(completeDictionary.keys())
-    # handleInfo(message)
-    # handleInfo (completeDictionary.keys())
-    startDownloadProcess(completeDict, inputFileName)
+    # # i = 0
+    # # for key, value in completeDict.items():
+    # #     completeDictionary[key] = value
+    # #     i += 1
+    # #     if (i == 5):
+    # #         break
+    # #
+    # # message = inputFileName + " : " + str(completeDictionary.keys())
+    # # handleInfo(message)
+    # # handleInfo (completeDictionary.keys())
+    # startDownloadProcess(completeDict, inputFileName)
 
 
 def is_connected():
