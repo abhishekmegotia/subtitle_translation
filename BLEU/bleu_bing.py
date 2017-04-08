@@ -1,5 +1,3 @@
-from __future__ import division
-
 import math
 import re
 from translation import bing
@@ -55,7 +53,7 @@ if __name__ == "__main__":
     #
     # print (BLEU.modified_precision(candidate1, [reference1], 1))
 
-    with open("1_en.txt", "r", encoding="utf8") as file:
+    with open("2_en.txt", "r", encoding="utf8") as file:
         for line in file:
             if line:
                 line = line.rstrip()
@@ -74,7 +72,7 @@ if __name__ == "__main__":
                     candidate.append(main)
                 cand_length=len(candidate)
 
-    with open("1_es.txt", "r", encoding="utf8") as file1:
+    with open("2_es.txt", "r", encoding="utf8") as file1:
         for line1 in file1:
             if line1:
                 line1 = line1.rstrip()
@@ -87,9 +85,13 @@ if __name__ == "__main__":
                 target = 'en'
                 for sub1 in subtitles1[1:length1]:
                     word1=sub1.split()
+                    translate_client = translate.Client()
+                    target = 'en'
                     english = []
                     for word in word1:
-                        english.append(bing(word, dst='en'))
+                        reference1 = translate_client.translate(word, target_language=target)
+                        reference1 = reference1['translatedText']
+                        english.append(reference1)
                     reference.append(english)
     score=[]
     for (cand,ref) in zip(candidate,reference):
