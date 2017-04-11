@@ -2,5 +2,5 @@ tensorflow/
 testing/
 parallelCorpus/
 __pycache__/
-startAmazon.sh
-tensorflowkeypair.pem
+/startAmazon.sh
+/tensorflowkeypair.pem
