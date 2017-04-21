@@ -43,13 +43,8 @@ UNK_ID = 3
 _WORD_SPLIT = re.compile(b"([.,!?\"':;)(])")
 _DIGIT_RE = re.compile(br"\d")
 
-# URLs for WMT data.
-_WMT_ENFR_TRAIN_URL = "http://www.statmt.org/wmt10/training-giga-fren.tar"
-_WMT_ENFR_DEV_URL = "http://www.statmt.org/wmt15/dev-v2.tgz"
-
-
 def basic_tokenizer(sentence):
-    """Very basic tokenizer: split the sentence into a list of tokens."""
+    sentence = sentence.lower()
     words = []
     for space_separated_fragment in sentence.strip().split():
         words.extend(_WORD_SPLIT.split(space_separated_fragment))
@@ -70,7 +65,7 @@ def create_vocabulary(vocabulary_path,
             for line in f:
                 counter += 1
                 if counter % 100000 == 0:
-                    handleInfo("Processing line : " + counter)
+                    handleInfo("Processing line : " + str(counter))
                 line = tf.compat.as_bytes(line)
                 tokens = tokenizer(line) if tokenizer else basic_tokenizer(
                     line)
@@ -100,7 +95,6 @@ def initialize_vocabulary(vocabulary_path):
     else:
         raise ValueError("Vocabulary file %s not found.", vocabulary_path)
 
-
 def sentence_to_token_ids(sentence,
                           vocabulary,
                           tokenizer=None,
@@ -113,7 +107,6 @@ def sentence_to_token_ids(sentence,
         return [vocabulary.get(w, UNK_ID) for w in words]
     # Normalize digits by 0 before looking words up in the vocabulary.
     return [vocabulary.get(_DIGIT_RE.sub(b"0", w), UNK_ID) for w in words]
-
 
 def data_to_token_ids(data_path,
                       target_path,
@@ -141,10 +134,10 @@ def prepare_wmt_data(data_dir,
                      en_vocabulary_size,
                      fr_vocabulary_size,
                      tokenizer=None):
-    to_train_path = "corpus\en.en"
-    from_train_path = "corpus\es.es"
-    to_dev_path = "corpus\en_dev.en"
-    from_dev_path = "corpus\es_dev.es"
+    to_train_path = "corpus/en.en"
+    from_train_path = "corpus/es.es"
+    to_dev_path = "corpus/en_dev.en"
+    from_dev_path = "corpus/es_dev.es"
     handleInfo(str(from_train_path + "   " + to_train_path))
     handleInfo(str(from_dev_path + "   " + to_dev_path))
     return prepare_data(data_dir, from_train_path, to_train_path,
