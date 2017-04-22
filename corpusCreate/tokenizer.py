@@ -11,9 +11,9 @@ class Tokenizer:
                 if line:
                     line = line.rstrip()
                     #line = line.lower()
-                    line = re.sub("[^'$A-z\d ]", ' ', line)
+                    line = re.sub("[^'+A-z\d ]", ' ', line)
                     # print(line)
-                    subtitles = line.split('$')
+                    subtitles = line.split('+++')
 
                     count = 0
                     for sub in subtitles:
@@ -48,13 +48,14 @@ class Tokenizer:
             for line in file:
                 if line:
                     line = line.rstrip()
-                    symToRemove = re.sub("(?i)(?:(?![×Þß÷þø])[a-zA-Z0-9À-ÿ$])", "", line)
+
+                    symToRemove = re.sub("(?i)(?:(?![×Þß÷þø])[a-zA-Z0-9À-ÿ+])", "", line)
 
                     symbols = symToRemove.split(' ')
                     for sym in symbols:
                         line = line.replace(sym,"")
 
-                    subtitles = line.split('$')
+                    subtitles = line.split('+++')
 
                     count = 0
                     for sub in subtitles:
