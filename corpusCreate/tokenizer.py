@@ -5,15 +5,21 @@ class Tokenizer:
 
     def readFile(self):
         # with open("2_en.txt", "r", encoding="utf8") as file:
-        enOut = open("en.txt", "w")
-        with open("2_en.txt", "r", encoding="utf8") as file:
+        enOut = open("tokenized_en.en", "w", encoding="utf8")
+        with open("en.en", "r", encoding="utf8") as file:
+            countEn = 0
             for line in file:
                 if line:
                     line = line.rstrip()
+
+                    #line = line.replace("+ + + + +","")
+
+                    countEn += line.count("+++++")
+
                     #line = line.lower()
                     line = re.sub("[^'+A-z\d ]", ' ', line)
-                    # print(line)
-                    subtitles = line.split('+++')
+                    #print(line)
+                    subtitles = line.split("+++++")
 
                     count = 0
                     for sub in subtitles:
@@ -40,14 +46,17 @@ class Tokenizer:
 
                         enOut.write(newLine.strip())
                         enOut.write("\n")
-
+            print(countEn)
         enOut.close()
 
-        esOut = open("es.txt", "w")
-        with open("2_es.txt", "r", encoding="utf8") as file:
+        esOut = open("tokenized_es.es", "w", encoding="utf8")
+        with open("es.es", "r", encoding="utf8") as file:
+            countEs = 0
             for line in file:
                 if line:
                     line = line.rstrip()
+
+                    countEs += line.count("+++++")
 
                     symToRemove = re.sub("(?i)(?:(?![×Þß÷þø])[a-zA-Z0-9À-ÿ+])", "", line)
 
@@ -55,7 +64,8 @@ class Tokenizer:
                     for sym in symbols:
                         line = line.replace(sym,"")
 
-                    subtitles = line.split('+++')
+                    #print(line)
+                    subtitles = line.split("+++++")
 
                     count = 0
                     for sub in subtitles:
@@ -85,6 +95,7 @@ class Tokenizer:
 
 
                         #print(self.CorpusDict)
+            print(countEs)
         esOut.close()
 
 
