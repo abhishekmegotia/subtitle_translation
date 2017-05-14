@@ -11,8 +11,7 @@ def timeIzNow():
     return full
 
 fileName = "logInfo"
-logName = os.path.join(currentDirectory,
-                       "logInformation/" + fileName + timeIzNow() + ".log")
+logName = os.path.join(currentDirectory, "logInformation/" + fileName + timeIzNow() + ".log")
 
 open(logName, 'w').close()
 

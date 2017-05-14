@@ -23,12 +23,12 @@ from logFile import handleException, handleInfo
 REMOTE_SERVER = "www.google.com"
 
 currentDirectory = os.path.dirname(__file__)
-inputDir = os.path.join(currentDirectory, 'inu')
+inputDir = os.path.join(currentDirectory, 'input100')
 
-if not os.path.exists(os.path.join(currentDirectory, 'output400')):
-    os.makedirs(currentDirectory + '/output400')
+if not os.path.exists(os.path.join(currentDirectory, 'output100')):
+    os.makedirs(currentDirectory + '/output1s00')
 
-outputDir = os.path.join(currentDirectory, 'output400')
+outputDir = os.path.join(currentDirectory, 'output100')
 
 if not os.path.exists(os.path.join(outputDir, 'en')):
     os.makedirs(outputDir + '/en')
@@ -88,8 +88,8 @@ def startDownloadProcess(completeDict, inputFileName):
 
         enTimeFrameIds = corpusList[2].split(',')
         esTimeFrameIds = corpusList[3].split(',')
-        movieTextEnglish = eachId + "$ "
-        movieTextSpanish = eachId + "$ "
+        movieTextEnglish = eachId + "+++++ "
+        movieTextSpanish = eachId + "+++++ "
         if (len(enTimeFrameIds) == len(esTimeFrameIds)):
             for index, englishIds in enumerate(enTimeFrameIds):
                 spanishIds = esTimeFrameIds[index]
@@ -97,8 +97,8 @@ def startDownloadProcess(completeDict, inputFileName):
                     movieTextEnglish += str(englishXMLFileContent.get(value))
                 for value in spanishIds.split(' '):
                     movieTextSpanish += str(spanishXMLFileContent.get(value))
-                movieTextEnglish += "$ "
-                movieTextSpanish += "$ "
+                movieTextEnglish += "+++++ "
+                movieTextSpanish += "+++++ "
 
             try:
                 # print (inputFileName.split('.')[0])
@@ -123,38 +123,24 @@ def startDownloadProcess(completeDict, inputFileName):
 
 
 def process_file(inputFile):
-    # if(inputFile == "1.txt"):
-    # unpaused.wait()
-    # event.wait()
-    print (inputFile)
-    # inputFileName = inputFile
-    # inputFile = os.path.join(inputDir, inputFile)
-    # currentTextFile = open(inputFile)
-    # completeDict = OrderedDict()
-    # for line in currentTextFile:
-    #     line = re.split(r'\t+|\n', line)
-    #     del line[-1]
-    #     spanishId = re.split(r'\.', re.split(r'\/', line[1])[3])[0]
-    #     if (spanishId in completeDict):
-    #         completeDict[spanishId][2] = completeDict[spanishId][2] + "," + line[2]
-    #         completeDict[spanishId][3] = completeDict[spanishId][3] + "," + line[3]
-    #     else:
-    #         completeDict[spanishId] = completeDict.get(spanishId, line)
-    # completeDict.popitem(last=False)[0]
-    # completeDict.popitem(last=True)[0]
-    # completeDictionary = {}
-    #
-    # # i = 0
-    # # for key, value in completeDict.items():
-    # #     completeDictionary[key] = value
-    # #     i += 1
-    # #     if (i == 5):
-    # #         break
-    # #
-    # # message = inputFileName + " : " + str(completeDictionary.keys())
-    # # handleInfo(message)
-    # # handleInfo (completeDictionary.keys())
-    # startDownloadProcess(completeDict, inputFileName)
+    inputFileName = inputFile
+    inputFile = os.path.join(inputDir, inputFile)
+    currentTextFile = open(inputFile)
+    completeDict = OrderedDict()
+    for line in currentTextFile:
+        line = re.split(r'\t+|\n', line)
+        del line[-1]
+        spanishId = re.split(r'\.', re.split(r'\/', line[1])[3])[0]
+        if (spanishId in completeDict):
+            completeDict[spanishId][2] = completeDict[spanishId][2] + "," + line[2]
+            completeDict[spanishId][3] = completeDict[spanishId][3] + "," + line[3]
+        else:
+            completeDict[spanishId] = completeDict.get(spanishId, line)
+    completeDict.popitem(last=False)[0]
+    completeDict.popitem(last=True)[0]
+    completeDictionary = {}
+
+    startDownloadProcess(completeDict, inputFileName)
 
 
 def is_connected():
@@ -179,19 +165,7 @@ if __name__ == '__main__':
     event.set()   # unpause workers
     flag = False
     while (not results.ready()):
-        # if(not is_connected()):
-        #     time.sleep(1)
-        #     if(not flag):
-        #         event.clear()  # pause after five seconds
-        #         handleInfo(" ****************************** Event Paused ")
-        #         # while(not is_connected()):
-        #         #     handleInfo(" ****************************** Event Paused ")
-        #         #     time.sleep(1)
         flag = True
-        # elif(flag):
-        #     event.set()   # unpause again after five more seconds
-        #     handleInfo(" ****************************** Event Resumed ")
-        #     flag = False
 
     print("--- %s seconds ---" % (time.time() - start_time))
 

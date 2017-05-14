@@ -2,19 +2,14 @@ import re
 
 class Tokenizer:
     CorpusDict = {}
-
     def readFile(self):
-        # with open("2_en.txt", "r", encoding="utf8") as file:
-        enOut = open("en.txt", "w")
-        with open("2_en.txt", "r", encoding="utf8") as file:
+        enOut = open("outen.en", "w", encoding="utf8")
+        with open("en.en", "r", encoding="utf8") as file:
             for line in file:
                 if line:
                     line = line.rstrip()
-                    #line = line.lower()
-                    line = re.sub("[^'$A-z\d ]", ' ', line)
-                    # print(line)
-                    subtitles = line.split('$')
-
+                    line = re.sub("[^'+A-z\d ]", ' ', line)
+                    subtitles = line.split('+++++ ')
                     count = 0
                     for sub in subtitles:
                         if sub == '':
@@ -24,9 +19,7 @@ class Tokenizer:
                             count = count + 1
                             continue
 
-
                         words = sub.split(' ')
-
                         newLine = ""
                         for word in words:
                             if word == ' ' or word == '':
@@ -36,26 +29,22 @@ class Tokenizer:
                                 newLine = word
                             else:
                                 newLine = newLine + " " + word
-
 
                         enOut.write(newLine.strip())
                         enOut.write("\n")
 
         enOut.close()
-
-        esOut = open("es.txt", "w")
-        with open("2_es.txt", "r", encoding="utf8") as file:
+        esOut = open("outes.es", "w", encoding="utf8")
+        with open("es.es", "r", encoding="utf8") as file:
             for line in file:
                 if line:
                     line = line.rstrip()
-                    symToRemove = re.sub("(?i)(?:(?![×Þß÷þø])[a-zA-Z0-9À-ÿ$])", "", line)
-
+                    symToRemove = re.sub("(?i)(?:(?![×Þß÷þø])[a-zA-Z0-9À-ÿ+])", "", line)
                     symbols = symToRemove.split(' ')
                     for sym in symbols:
-                        line = line.replace(sym,"")
+                        line = line.replace(sym, "")
 
-                    subtitles = line.split('$')
-
+                    subtitles = line.split('+++++ ')
                     count = 0
                     for sub in subtitles:
                         if sub == '':
@@ -65,9 +54,7 @@ class Tokenizer:
                             count = count + 1
                             continue
 
-
                         words = sub.split(' ')
-
                         newLine = ""
                         for word in words:
                             if word == ' ' or word == '':
@@ -78,14 +65,9 @@ class Tokenizer:
                             else:
                                 newLine = newLine + " " + word
 
-
                         esOut.write(newLine.strip())
                         esOut.write("\n")
-
-
-                        #print(self.CorpusDict)
         esOut.close()
-
 
 obj = Tokenizer()
 obj.readFile()

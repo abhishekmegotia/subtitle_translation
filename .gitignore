@@ -2,5 +2,9 @@ tensorflow/
 testing/
 parallelCorpus/
 __pycache__/
-/startAmazon.sh
+/start.sh
 /tensorflowkeypair.pem
+translation/corpus/
+translation/decode/
+translation/parliment/
+translation/translation.zip
