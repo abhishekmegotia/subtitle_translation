@@ -4,7 +4,5 @@ parallelCorpus/
 __pycache__/
 /start.sh
 /tensorflowkeypair.pem
-translation/corpus/
-translation/decode/
 translation/parliment/
 translation/translation.zip
