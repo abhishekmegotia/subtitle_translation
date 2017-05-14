@@ -108,10 +108,10 @@ def data_to_token_ids(data_path, target_path, vocabulary_path, tokenizer=None, n
 
 
 def prepare_wmt_data(data_dir, en_vocabulary_size, fr_vocabulary_size, tokenizer=None):
-    to_train_path = "corpus/en.en"
-    from_train_path = "corpus/es.es"
-    to_dev_path = "corpus/en_dev.en"
-    from_dev_path = "corpus/es_dev.es"
+    to_train_path = "corpus/en.txt"
+    from_train_path = "corpus/es.txt"
+    to_dev_path = "corpus/en_dev.txt"
+    from_dev_path = "corpus/es_dev.txt"
     handleInfo(str(from_train_path + "   " + to_train_path))
     handleInfo(str(from_dev_path + "   " + to_dev_path))
     return prepare_data(data_dir, from_train_path, to_train_path,
