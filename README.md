@@ -4,7 +4,7 @@ Machine translation using sequence-to-sequence modeling technique using RNN to t
 ## Installation
 1. To run this program, please install tensorflow 1.0.1 either CPU or GPU version. 
 2. Once installed download the parallel corpora from OPUS(`http://opus.lingfil.uu.se/OpenSubtitles2016.php`) collection of subtitles from `OpenSubtitles.org`
-3. Clone the repository into your local machine. `git clone https://github.com/mehulviby/subtitle_translation.git`
+3. Clone the repository into your local machine. `git clone https://github.com/abhishekmegotia/subtitle_translation.git`
 4. Save the downloaded parallel corpus inside the `translation/corpus/` folder with the name given
 
 ## Running
